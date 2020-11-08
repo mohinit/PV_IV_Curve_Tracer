@@ -1,1 +1,8 @@
-The selected TTGO ESP32 is Arduino compatible, as such the Arduino IDE is used to code the ESP32 micro-controller. This decision is made due to the abundance of resources and libraries available to assist in fulfilling the goals of the ESP32 measurement and communication strategy. The micro-controller is programmed for the following functionality: Create and establish Bluetooth connection and communication with a device; Measurements of ADC pins; Writing to digital pins to control switching circuitry; Obtain temperature readings from BME280 and Display instructions and measurements to user on OLED display.
+The selected TTGO ESP32 is Arduino compatible, as such the Arduino IDE is used to code the ESP32 micro-controller. 
+This decision is made due to the abundance of resources and libraries available to assist in fulfilling the goals of the ESP32 measurement and communication strategy. 
+The micro-controller is programmed for the following functionality: 
+Create and establish Bluetooth connection and communication with a device; 
+Measurements of ADC pins; 
+Writing to digital pins to control switching circuitry; 
+Obtain temperature readings from BME280 and 
+Display instructions and measurements to user on OLED display.
