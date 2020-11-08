@@ -1,3 +1,85 @@
+//import necessary libraries to calibrate ADC readings from ESP32 pins
+#include "Arduino.h"
+#include <ESP32AnalogRead.h>
+
+//import necessary libraries for the BLE capabilities
+#include <BLEDevice.h>
+#include <BLEServer.h>
+#include <BLEUtils.h>
+#include <BLE2902.h>
+
+//import necessary libraries to use OLED display.
+//TFT display communicates via SPI communication: include the SPI library on your code. 
+//We also use the TFT library to write and draw on the display.
+#include <SPI.h>
+#include <TFT_eSPI.h>       // Hardware-specific library
+
+#include <Wire.h>//library to use I2C
+//libraries to interface with BME280
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BME280.h>
+
+TFT_eSPI tft = TFT_eSPI();  // Invoke custom library
+
+BLEServer* pServer = NULL;
+BLECharacteristic* pCharacteristic = NULL;
+bool deviceConnected = false;
+bool oldDeviceConnected = false;
+
+//define UUID (Universally Unique Identifier) for the Service and Characteristic
+#define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
+#define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
+
+Adafruit_BME280 bme; // I2C protocol, create object called bme
+
+//callback that handles the bluetooth connection status
+//sets the "deviceConnected" flag true or false when you connect or discconect from the ESP32
+class MyServerCallbacks: public BLEServerCallbacks {
+    void onConnect(BLEServer* pServer) {
+      deviceConnected = true;
+      BLEDevice::startAdvertising();
+    };
+
+    void onDisconnect(BLEServer* pServer) {
+      deviceConnected = false;
+    }
+};
+
+//declare pins
+ESP32AnalogRead vmeas1adc;
+ESP32AnalogRead vmeas2adc;
+ESP32AnalogRead imeas1adc;
+ESP32AnalogRead imeas2adc;
+const int s1Pin=27;
+const int s2Pin=2;
+const int s3Pin=15;
+const int readButtonPress=37;
+
+//variables
+// adc pin values
+float v1meas=0;
+float i1meas=0;
+float v2meas=0;
+float i2meas=0;
+//desired values
+float vmeas1=0;
+float imeas1=0;
+float vmeas2=0;
+float imeas2=0;
+int takeRead=0;
+float temperature=0;
+
+//constants     
+#define        resolution12bit                 4095           
+#define        REF_VOLTAGE                     3.3         
+float sensitivity=0.1;  
+float Voc=37;//48.2
+float Isc=8.66;//9.72
+float v_offset1 = 2.54;
+float v_offset2 = 2.54;
+
+
+
 void setup() {
  //import necessary libraries to calibrate ADC readings from ESP32 pins
 #include "Arduino.h"
@@ -234,7 +316,7 @@ void loop() {
     s3on();
     }
 
-  delay(0.005);
+  delay(0.01);
 }
 
 void display_when_not_measuring(){
@@ -270,7 +352,6 @@ void display_when_not_measuring(){
         tft.setTextColor(TFT_BLACK, TFT_WHITE);
         tft.print("   Live Measurements\n");
         tft.print("V1: ");
-        //tft.print(v1ADC);
         tft.print(vmeas1);
         tft.print("      I1: ");
         tft.print(imeas1);
