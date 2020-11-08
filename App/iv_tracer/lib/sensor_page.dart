@@ -32,7 +32,7 @@ class _SensorPageState extends State<SensorPage> {
   bool csvUpdating = false;
   final String SERVICE_UUID = "4fafc201-1fb5-459e-8fcc-c5c9c331914b";
   final String CHARACTERISTIC_UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8";
-  final int listSize = 100 ;// set size for all graph values and excel file
+  final int listSize = 100 ;// set size csv file
   bool isReady;
   Stream<List<int>> stream;
   Light _light = new Light();
