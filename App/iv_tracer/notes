@@ -1,1 +1,17 @@
-
+The following additions must be made to the flutter project for the app to work
+- in iv_tracer>android>app>src>main> Android Manifest.xml add the following line of code:
+     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+     
+- in iv_tracer>android>app>build.gradle:
+    the compileSdkVersion is set to 29
+    the minSdkVersion is set to 21
+    the targetSdkVersion is set to 29     
+     
+- the following needs to be added to the dependencies of the pubspec.yaml file:
+    flutter_blue: ^0.7.2
+    light: ^1.0.0
+    flutter_plot: ^0.0.4
+    charts_flutter: ^0.9.0
+    csv: ^4.0.3
+    path_provider: ^1.6.18
+    ext_storage: ^1.0.3
