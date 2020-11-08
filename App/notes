@@ -1,0 +1,23 @@
+Android Studio's Flutter extension is used to develop the App. Flutter uses Dart as its programming language.
+The app allows the user to: 
+- view live measured voltage, current, temperature and light intensity
+- visualise the voltage and current measurements in their own respective refreshable line charts
+- visualise the IV curve 
+- visualise the IV curve scaled back to STC
+- once the IV curve has been traced, the measurements are saved to a CSV file in the phone's internal storage to allow the user to access the data at a later stage
+
+The skeleton of the code used to create the app is achieved with reference to:
+- Paul DeMarco's example code (https://github.com/pauldemarco/flutter_blue/tree/master/example), 
+- (https://www.youtube.com/watch?v=w6jo2kJanqU&t=1406s) and 
+- (https://github.com/0015/IdeasNProjects/tree/master/Esp32_dust_sensor_ble_FLUTTER/). 
+These references are used to assist in creating 'main.dart', 'widget.dart' and 'sensor\_page.dart'. 
+At its basis, these files establish the visuals, Bluetooth connection and communication of measurements. 
+
+The functionality of the app thereafter was created with assistance from the associated pub.dev websites for each of the packages used. 
+VoltageChart.dart, CurrentChart.dart, VCChart.dart and stc\_iv.dart are created with help from a charts\_flutter pub.dev example project.
+Flutter packages used for this project:
+- flutter_blue
+- light
+- charts_flutter
+- csv
+- ext_storage
