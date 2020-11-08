@@ -14,11 +14,9 @@ import 'package:iv_tracer/VoltageChart.dart';
 import 'package:iv_tracer/stc_iv.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:light/light.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'DataModel.dart';
 import 'gallery_scaffold.dart';
-//import 'package:flutter_android/android_hardware.dart' show Sensor, SensorEvent, SensorManager;
 
 class SensorPage extends StatefulWidget {
   const SensorPage({Key key, this.device}): super(key: key);
